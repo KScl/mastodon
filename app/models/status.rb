@@ -21,6 +21,7 @@
 #  favourites_count       :integer          default(0), not null
 #  reblogs_count          :integer          default(0), not null
 #  language               :string
+#  full_status_text       :text             default(""), not null
 #  conversation_id        :integer
 #
 
@@ -240,6 +241,7 @@ class Status < ApplicationRecord
   def prepare_contents
     text&.strip!
     spoiler_text&.strip!
+    full_status_text&.strip!
   end
 
   def set_reblog

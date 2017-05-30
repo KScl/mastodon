@@ -290,6 +290,7 @@ ActiveRecord::Schema.define(version: 20170625140443) do
     t.integer "favourites_count", default: 0, null: false
     t.integer "reblogs_count", default: 0, null: false
     t.string "language"
+    t.text "full_status_text", default: "", null: false
     t.bigint "conversation_id"
     t.index ["account_id", "id"], name: "index_statuses_on_account_id_id"
     t.index ["conversation_id"], name: "index_statuses_on_conversation_id"
