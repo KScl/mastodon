@@ -348,9 +348,9 @@ en:
       subject:
         one: "1 new notification since your last visit \U0001F418"
         other: "%{count} new notifications since your last visit \U0001F418"
-    favourite:
-      body: 'Your status was favourited by %{name}:'
-      subject: "%{name} favourited your status"
+    favorite:
+      body: 'Your status was favorited by %{name}:'
+      subject: "%{name} favorited your status"
     follow:
       body: "%{name} is now following you!"
       subject: "%{name} is now following you"
@@ -361,8 +361,8 @@ en:
       body: 'You were mentioned by %{name} in:'
       subject: You were mentioned by %{name}
     reblog:
-      body: 'Your status was boosted by %{name}:'
-      subject: "%{name} boosted your status"
+      body: 'Your status was retooted by %{name}:'
+      subject: "%{name} retooted your status"
   number:
     human:
       decimal_units:
@@ -468,7 +468,7 @@ en:
   stream_entries:
     click_to_show: Click to show
     pinned: Pinned toot
-    reblogged: boosted
+    reblogged: retooted
     sensitive_content: Sensitive content
   terms:
     body_html: |
