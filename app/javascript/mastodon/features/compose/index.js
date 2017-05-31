@@ -14,11 +14,12 @@ import SearchResultsContainer from './containers/search_results_container';
 import { changeComposing } from '../../actions/compose';
 
 const messages = defineMessages({
-  start: { id: 'getting_started.heading', defaultMessage: 'Getting started' },
   home_timeline: { id: 'tabs_bar.home', defaultMessage: 'Home' },
   notifications: { id: 'tabs_bar.notifications', defaultMessage: 'Notifications' },
   public: { id: 'navigation_bar.public_timeline', defaultMessage: 'Federated timeline' },
-  community: { id: 'navigation_bar.community_timeline', defaultMessage: 'Local timeline' },
+  direct: { id: 'navigation_bar.direct', defaultMessage: 'Direct messages' },
+  blocks: { id: 'navigation_bar.blocks', defaultMessage: 'Blocks' },
+  mutes: { id: 'navigation_bar.mutes', defaultMessage: 'Mutes' },
   preferences: { id: 'navigation_bar.preferences', defaultMessage: 'Preferences' },
   logout: { id: 'navigation_bar.logout', defaultMessage: 'Logout' },
 });
@@ -64,23 +65,14 @@ export default class Compose extends React.PureComponent {
     if (multiColumn) {
       const { columns } = this.props;
       header = (
-        <nav className='drawer__header'>
-          <Link to='/getting-started' className='drawer__tab' title={intl.formatMessage(messages.start)} aria-label={intl.formatMessage(messages.start)}><i role='img' className='fa fa-fw fa-asterisk' /></Link>
-          {!columns.some(column => column.get('id') === 'HOME') && (
-            <Link to='/timelines/home' className='drawer__tab' title={intl.formatMessage(messages.home_timeline)} aria-label={intl.formatMessage(messages.home_timeline)}><i role='img' className='fa fa-fw fa-home' /></Link>
-          )}
-          {!columns.some(column => column.get('id') === 'NOTIFICATIONS') && (
-            <Link to='/notifications' className='drawer__tab' title={intl.formatMessage(messages.notifications)} aria-label={intl.formatMessage(messages.notifications)}><i role='img' className='fa fa-fw fa-bell' /></Link>
-          )}
-          {!columns.some(column => column.get('id') === 'COMMUNITY') && (
-            <Link to='/timelines/public/local' className='drawer__tab' title={intl.formatMessage(messages.community)} aria-label={intl.formatMessage(messages.community)}><i role='img' className='fa fa-fw fa-users' /></Link>
-          )}
-          {!columns.some(column => column.get('id') === 'PUBLIC') && (
-            <Link to='/timelines/public' className='drawer__tab' title={intl.formatMessage(messages.public)} aria-label={intl.formatMessage(messages.public)}><i role='img' className='fa fa-fw fa-globe' /></Link>
-          )}
-          <a href='/settings/preferences' className='drawer__tab' title={intl.formatMessage(messages.preferences)} aria-label={intl.formatMessage(messages.preferences)}><i role='img' className='fa fa-fw fa-cog' /></a>
-          <a href='/auth/sign_out' className='drawer__tab' data-method='delete' title={intl.formatMessage(messages.logout)} aria-label={intl.formatMessage(messages.logout)}><i role='img' className='fa fa-fw fa-sign-out' /></a>
-        </nav>
+        <div className='drawer__header'>
+          <Link title={intl.formatMessage(messages.public)} className='drawer__tab' to='/timelines/public'><i role='img' aria-label={intl.formatMessage(messages.public)} className='fa fa-fw fa-globe' /></Link>
+          <Link title={intl.formatMessage(messages.direct)} className='drawer__tab' to='/timelines/direct'><i role='img' aria-label={intl.formatMessage(messages.direct)} className='fa fa-fw fa-envelope' /></Link>
+          <Link title={intl.formatMessage(messages.blocks)} className='drawer__tab' to='/blocks'><i role='img' aria-label={intl.formatMessage(messages.blocks)} className='fa fa-fw fa-ban' /></Link>
+          <Link title={intl.formatMessage(messages.mutes)} className='drawer__tab' to='/mutes'><i role='img' aria-label={intl.formatMessage(messages.mutes)} className='fa fa-fw fa-volume-off' /></Link>
+          <a title={intl.formatMessage(messages.preferences)} className='drawer__tab' href='/settings/preferences'><i role='img' aria-label={intl.formatMessage(messages.preferences)} className='fa fa-fw fa-cog' /></a>
+          <a title={intl.formatMessage(messages.logout)} className='drawer__tab' href='/auth/sign_out' data-method='delete'><i role='img' aria-label={intl.formatMessage(messages.logout)} className='fa fa-fw fa-sign-out' /></a>
+        </div>
       );
     }
 
