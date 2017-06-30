@@ -17,6 +17,7 @@ const messages = defineMessages({
   pin: { id: 'status.pin', defaultMessage: 'Pin on profile' },
   unpin: { id: 'status.unpin', defaultMessage: 'Unpin from profile' },
   embed: { id: 'status.embed', defaultMessage: 'Embed' },
+  stringRotate: { id: 'tools.string_rotate', defaultMessage: 'ROT13 text' },
 });
 
 @injectIntl
@@ -36,6 +37,7 @@ export default class ActionBar extends React.PureComponent {
     onReport: PropTypes.func,
     onPin: PropTypes.func,
     onEmbed: PropTypes.func,
+    onSetStringRotate: PropTypes.func,
     me: PropTypes.number.isRequired,
     intl: PropTypes.object.isRequired,
   };
@@ -79,12 +81,19 @@ export default class ActionBar extends React.PureComponent {
     this.props.onEmbed(this.props.status);
   }
 
+  handleSetStringRotate = () => {
+    this.props.onSetStringRotate(this.props.status);
+  }
+
   render () {
     const { status, me, intl } = this.props;
 
     const publicStatus = ['public', 'unlisted'].includes(status.get('visibility'));
 
     let menu = [];
+
+    menu.push({ text: intl.formatMessage(messages.stringRotate), action: this.handleSetStringRotate });
+    menu.push(null);
 
     if (publicStatus) {
       menu.push({ text: intl.formatMessage(messages.embed), action: this.handleEmbed });

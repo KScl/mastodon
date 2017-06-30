@@ -24,6 +24,7 @@ const messages = defineMessages({
   pin: { id: 'status.pin', defaultMessage: 'Pin on profile' },
   unpin: { id: 'status.unpin', defaultMessage: 'Unpin from profile' },
   embed: { id: 'status.embed', defaultMessage: 'Embed' },
+  stringRotate: { id: 'tools.string_rotate', defaultMessage: 'ROT13 text' },
 });
 
 @injectIntl
@@ -46,6 +47,7 @@ export default class StatusActionBar extends ImmutablePureComponent {
     onEmbed: PropTypes.func,
     onMuteConversation: PropTypes.func,
     onPin: PropTypes.func,
+    onSetStringRotate: PropTypes.func,
     me: PropTypes.number,
     withDismiss: PropTypes.bool,
     intl: PropTypes.object.isRequired,
@@ -114,6 +116,10 @@ export default class StatusActionBar extends ImmutablePureComponent {
     this.props.onMuteConversation(this.props.status);
   }
 
+  handleSetStringRotate = () => {
+    this.props.onSetStringRotate(this.props.status);
+  }
+
   render () {
     const { status, me, intl, withDismiss } = this.props;
 
@@ -125,6 +131,9 @@ export default class StatusActionBar extends ImmutablePureComponent {
     let reblogIcon = 'retweet';
     let replyIcon;
     let replyTitle;
+
+    menu.push({ text: intl.formatMessage(messages.stringRotate), action: this.handleSetStringRotate });
+    menu.push(null);
 
     menu.push({ text: intl.formatMessage(messages.open), action: this.handleOpen });
 

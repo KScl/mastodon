@@ -6,6 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import Permalink from './permalink';
 import classnames from 'classnames';
 import { getInstanceColor, getContrastYIQ } from '../instance_color'
+import { htmlStringRotate } from '../rotn'
 
 export default class StatusContent extends React.PureComponent {
 
@@ -18,6 +19,7 @@ export default class StatusContent extends React.PureComponent {
     expanded: PropTypes.bool,
     onExpandedToggle: PropTypes.func,
     onClick: PropTypes.func,
+    stringRotate: PropTypes.number,
   };
 
   state = {
@@ -142,6 +144,10 @@ export default class StatusContent extends React.PureComponent {
 
     if (isRtl(status.get('search_index'))) {
       directionStyle.direction = 'rtl';
+    }
+
+    if (this.props.stringRotate && this.props.stringRotate != 0) {
+      content.__html = htmlStringRotate(content.__html, this.props.stringRotate);
     }
 
     if (status.get('spoiler_text').length > 0) {

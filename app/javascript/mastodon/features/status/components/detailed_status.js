@@ -23,6 +23,7 @@ export default class DetailedStatus extends ImmutablePureComponent {
     onOpenMedia: PropTypes.func.isRequired,
     onOpenVideo: PropTypes.func.isRequired,
     autoPlayGif: PropTypes.bool,
+    stringRotate: PropTypes.number,
   };
 
   handleAccountClick = (e) => {
@@ -78,7 +79,7 @@ export default class DetailedStatus extends ImmutablePureComponent {
           <DisplayName account={status.get('account')} />
         </a>
 
-        <StatusContent status={status} />
+        <StatusContent status={status} stringRotate={this.props.stringRotate} />
 
         {media}
 

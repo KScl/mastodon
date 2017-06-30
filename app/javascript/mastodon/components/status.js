@@ -43,6 +43,8 @@ export default class Status extends ImmutablePureComponent {
 
   state = {
     isExpanded: false,
+
+    stringRotate: 0,
   }
 
   // Avoid checking props that are functions (and whose equality will always
@@ -57,7 +59,10 @@ export default class Status extends ImmutablePureComponent {
     'hidden',
   ]
 
-  updateOnStates = ['isExpanded']
+  updateOnStates = [
+    'isExpanded',
+    'stringRotate',
+  ]
 
   handleClick = () => {
     if (!this.context.router) {
@@ -79,6 +84,11 @@ export default class Status extends ImmutablePureComponent {
   handleExpandedToggle = () => {
     this.setState({ isExpanded: !this.state.isExpanded });
   };
+
+  handleSetStringRotate = () => {
+    // For now, alternate between 13 and 0.
+    this.setState({ stringRotate: (this.state.stringRotate + 13) % 26 });
+  }
 
   renderLoadingMediaGallery () {
     return <div className='media_gallery' style={{ height: '110px' }} />;
@@ -174,11 +184,11 @@ export default class Status extends ImmutablePureComponent {
           </a>
         </div>
 
-        <StatusContent status={status} onClick={this.handleClick} expanded={isExpanded} onExpandedToggle={this.handleExpandedToggle} />
+        <StatusContent status={status} stringRotate={this.state.stringRotate} onClick={this.handleClick} expanded={isExpanded} onExpandedToggle={this.handleExpandedToggle} />
 
         {media}
 
-        <StatusActionBar {...this.props} />
+        <StatusActionBar onSetStringRotate={this.handleSetStringRotate} {...this.props} />
       </div>
     );
   }

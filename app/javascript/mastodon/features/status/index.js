@@ -71,6 +71,10 @@ export default class Status extends ImmutablePureComponent {
     intl: PropTypes.object.isRequired,
   };
 
+  state = {
+    stringRotate: 0,
+  };
+
   componentWillMount () {
     this.props.dispatch(fetchStatus(Number(this.props.params.statusId)));
   }
@@ -78,6 +82,9 @@ export default class Status extends ImmutablePureComponent {
   componentWillReceiveProps (nextProps) {
     if (nextProps.params.statusId !== this.props.params.statusId && nextProps.params.statusId) {
       this.props.dispatch(fetchStatus(Number(nextProps.params.statusId)));
+
+      // Reset display tools
+      this.setState({ stringRotate: 0 });
     }
   }
 
@@ -151,6 +158,11 @@ export default class Status extends ImmutablePureComponent {
     this.props.dispatch(openModal('EMBED', { url: status.get('url') }));
   }
 
+  handleSetStringRotate = () => {
+    // For now, alternate between 13 and 0.
+    this.setState({ stringRotate: (this.state.stringRotate + 13) % 26 });
+  }
+
   renderChildren (list) {
     return list.map(id => <StatusContainer key={id} id={id} />);
   }
@@ -190,6 +202,7 @@ export default class Status extends ImmutablePureComponent {
               me={me}
               onOpenVideo={this.handleOpenVideo}
               onOpenMedia={this.handleOpenMedia}
+              stringRotate={this.state.stringRotate}
             />
 
             <ActionBar
@@ -203,6 +216,7 @@ export default class Status extends ImmutablePureComponent {
               onReport={this.handleReport}
               onPin={this.handlePin}
               onEmbed={this.handleEmbed}
+              onSetStringRotate={this.handleSetStringRotate}
             />
 
             {descendants}
