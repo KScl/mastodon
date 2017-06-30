@@ -21,6 +21,7 @@ const messages = defineMessages({
   report: { id: 'status.report', defaultMessage: 'Report @{name}' },
   muteConversation: { id: 'status.mute_conversation', defaultMessage: 'Mute conversation' },
   unmuteConversation: { id: 'status.unmute_conversation', defaultMessage: 'Unmute conversation' },
+  stringRotate: { id: 'tools.string_rotate', defaultMessage: 'ROT13 text' },
 });
 
 @injectIntl
@@ -41,6 +42,7 @@ export default class StatusActionBar extends ImmutablePureComponent {
     onBlock: PropTypes.func,
     onReport: PropTypes.func,
     onMuteConversation: PropTypes.func,
+    onSetStringRotate: PropTypes.func,
     me: PropTypes.number,
     withDismiss: PropTypes.bool,
     intl: PropTypes.object.isRequired,
@@ -101,6 +103,10 @@ export default class StatusActionBar extends ImmutablePureComponent {
     this.props.onMuteConversation(this.props.status);
   }
 
+  handleSetStringRotate = () => {
+    this.props.onSetStringRotate(this.props.status);
+  }
+
   render () {
     const { status, me, intl, withDismiss } = this.props;
     const reblogDisabled = status.get('visibility') === 'private' || status.get('visibility') === 'direct';
@@ -111,6 +117,9 @@ export default class StatusActionBar extends ImmutablePureComponent {
     let reblogIcon = 'retweet';
     let replyIcon;
     let replyTitle;
+
+    menu.push({ text: intl.formatMessage(messages.stringRotate), action: this.handleSetStringRotate });
+    menu.push(null);
 
     menu.push({ text: intl.formatMessage(messages.open), action: this.handleOpen });
     menu.push(null);

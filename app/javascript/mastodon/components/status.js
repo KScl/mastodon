@@ -49,6 +49,8 @@ export default class Status extends ImmutablePureComponent {
     isExpanded: false,
     isIntersecting: true, // assume intersecting until told otherwise
     isHidden: false, // set to true in requestIdleCallback to trigger un-render
+
+    stringRotate: 0,
   }
 
   // Avoid checking props that are functions (and whose equality will always
@@ -64,7 +66,10 @@ export default class Status extends ImmutablePureComponent {
     'listLength',
   ]
 
-  updateOnStates = ['isExpanded']
+  updateOnStates = [
+    'isExpanded',
+    'stringRotate',
+  ]
 
   shouldComponentUpdate (nextProps, nextState) {
     if (!nextState.isIntersecting && nextState.isHidden) {
@@ -158,6 +163,11 @@ export default class Status extends ImmutablePureComponent {
     this.setState({ isExpanded: !this.state.isExpanded });
   };
 
+  handleSetStringRotate = () => {
+    // For now, alternate between 13 and 0.
+    this.setState({ stringRotate: (this.state.stringRotate + 13) % 26 });
+  }
+
   renderLoadingMediaGallery () {
     return <div className='media_gallery' style={{ height: '110px' }} />;
   }
@@ -247,11 +257,11 @@ export default class Status extends ImmutablePureComponent {
           </a>
         </div>
 
-        <StatusContent status={status} onClick={this.handleClick} expanded={isExpanded} onExpandedToggle={this.handleExpandedToggle} />
+        <StatusContent status={status} stringRotate={this.state.stringRotate} onClick={this.handleClick} expanded={isExpanded} onExpandedToggle={this.handleExpandedToggle} />
 
         {media}
 
-        <StatusActionBar {...this.props} />
+        <StatusActionBar onSetStringRotate={this.handleSetStringRotate} {...this.props} />
       </article>
     );
   }

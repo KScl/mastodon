@@ -14,6 +14,7 @@ const messages = defineMessages({
   favourite: { id: 'status.favourite', defaultMessage: 'Favourite' },
   report: { id: 'status.report', defaultMessage: 'Report @{name}' },
   share: { id: 'status.share', defaultMessage: 'Share' },
+  stringRotate: { id: 'tools.string_rotate', defaultMessage: 'ROT13 text' },
 });
 
 @injectIntl
@@ -31,6 +32,7 @@ export default class ActionBar extends React.PureComponent {
     onDelete: PropTypes.func.isRequired,
     onMention: PropTypes.func.isRequired,
     onReport: PropTypes.func,
+    onSetStringRotate: PropTypes.func,
     me: PropTypes.number.isRequired,
     intl: PropTypes.object.isRequired,
   };
@@ -66,10 +68,17 @@ export default class ActionBar extends React.PureComponent {
     });
   }
 
+  handleSetStringRotate = () => {
+    this.props.onSetStringRotate(this.props.status);
+  }
+
   render () {
     const { status, me, intl } = this.props;
 
     let menu = [];
+
+    menu.push({ text: intl.formatMessage(messages.stringRotate), action: this.handleSetStringRotate });
+    menu.push(null);
 
     if (me === status.getIn(['account', 'id'])) {
       menu.push({ text: intl.formatMessage(messages.delete), action: this.handleDeleteClick });
