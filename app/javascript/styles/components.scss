@@ -409,6 +409,12 @@
       background-color: rgba($base-overlay-background, 0.3);
     }
   }
+
+  .upload-button__icon {
+    position: absolute;
+    right: 5px;
+    top: 30px;
+  }
 }
 
 .compose-form__publish {

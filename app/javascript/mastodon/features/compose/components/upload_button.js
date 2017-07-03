@@ -55,8 +55,8 @@ export default class UploadButton extends ImmutablePureComponent {
     const { intl, resetFileKey, disabled, acceptContentTypes } = this.props;
 
     return (
-      <div className='compose-form__upload-button'>
-        <IconButton icon='camera' title={intl.formatMessage(messages.upload)} disabled={disabled} onClick={this.handleClick} className='compose-form__upload-button-icon' size={18} inverted style={iconStyle} />
+      <div className='upload-button__icon'>
+        <IconButton icon='paperclip' title={intl.formatMessage(messages.upload)} disabled={disabled} onClick={this.handleClick} className='compose-form__upload-button-icon' size={20} inverted style={iconStyle} />
         <label>
           <span style={{ display: 'none' }}>{intl.formatMessage(messages.upload)}</span>
           <input
