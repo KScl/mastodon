@@ -211,6 +211,7 @@ export default class ComposeForm extends ImmutablePureComponent {
           />
 
           <EmojiPickerDropdown onPickEmoji={this.handleEmojiPick} />
+          <UploadButtonContainer />
         </div>
 
         <div className='compose-form__modifiers'>
@@ -219,7 +220,6 @@ export default class ComposeForm extends ImmutablePureComponent {
 
         <div className='compose-form__buttons-wrapper'>
           <div className='compose-form__buttons'>
-            <UploadButtonContainer />
             <PrivacyDropdownContainer />
             <SensitiveButtonContainer />
             <SpoilerButtonContainer />
