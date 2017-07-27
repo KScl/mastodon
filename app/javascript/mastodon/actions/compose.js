@@ -106,6 +106,9 @@ export function submitCompose() {
           dispatch(updateTimeline('public', { ...response.data }));
         }
       }
+      else if (response.data.visibility === 'direct') {
+        dispatch(updateTimeline('direct', { ...response.data }));
+      }
     }).catch(function (error) {
       dispatch(submitComposeFail(error));
     });
