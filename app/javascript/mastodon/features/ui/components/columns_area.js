@@ -8,6 +8,7 @@ import Notifications from '../../notifications';
 import PublicTimeline from '../../public_timeline';
 import CommunityTimeline from '../../community_timeline';
 import HashtagTimeline from '../../hashtag_timeline';
+import DirectTimeline from '../../direct_timeline';
 import Compose from '../../compose';
 import { getPreviousLink, getNextLink } from './tabs_bar';
 
@@ -18,6 +19,7 @@ const componentMap = {
   'PUBLIC': PublicTimeline,
   'COMMUNITY': CommunityTimeline,
   'HASHTAG': HashtagTimeline,
+  'DIRECT': DirectTimeline,
 };
 
 export default class ColumnsArea extends ImmutablePureComponent {
