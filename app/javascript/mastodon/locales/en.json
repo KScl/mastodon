@@ -192,6 +192,7 @@
   "status.unmute_conversation": "Unmute conversation",
   "status.unpin": "Unpin from profile",
   "tabs_bar.compose": "Compose",
+  "tabs_bar.direct": "Messages",
   "tabs_bar.federated_timeline": "Federated",
   "tabs_bar.home": "Home",
   "tabs_bar.local_timeline": "Local",
