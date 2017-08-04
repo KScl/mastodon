@@ -105,8 +105,7 @@ export function submitCompose() {
         if (getState().getIn(['timelines', 'public', 'loaded'])) {
           dispatch(updateTimeline('public', { ...response.data }));
         }
-      }
-      else if (response.data.visibility === 'direct') {
+      } else if (response.data.visibility === 'direct') {
         dispatch(updateTimeline('direct', { ...response.data }));
       }
     }).catch(function (error) {

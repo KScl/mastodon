@@ -138,8 +138,8 @@ class Status < ApplicationRecord
 
     def as_direct_timeline(account)
       query = joins("LEFT OUTER JOIN mentions ON statuses.id = mentions.status_id AND mentions.account_id = #{account.id}")
-        .where("mentions.account_id = #{account.id} OR statuses.account_id = #{account.id}")
-        .where(visibility: [:direct])
+              .where("mentions.account_id = #{account.id} OR statuses.account_id = #{account.id}")
+              .where(visibility: [:direct])
 
       apply_timeline_filters(query, account, false)
     end
