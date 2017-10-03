@@ -9,11 +9,6 @@ class OStatus::Activity::Creation < OStatus::Activity::Base
 
     return [nil, false] if @account.suspended?
 
-    if activitypub_uri? && [:public, :unlisted].include?(visibility_scope)
-      result = perform_via_activitypub
-      return result if result.first.present?
-    end
-
     Rails.logger.debug "Creating remote status #{id}"
 
     # Return early if status already exists in db
@@ -55,10 +50,6 @@ class OStatus::Activity::Creation < OStatus::Activity::Base
     DistributionWorker.perform_async(status.id)
 
     [status, true]
-  end
-
-  def perform_via_activitypub
-    [find_status(activitypub_uri) || ActivityPub::FetchRemoteStatusService.new.call(activitypub_uri), false]
   end
 
   def content
