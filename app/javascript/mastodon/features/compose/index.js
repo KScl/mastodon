@@ -66,10 +66,10 @@ export default class Compose extends React.PureComponent {
       const { columns } = this.props;
       header = (
         <div className='drawer__header'>
-          <Link title={intl.formatMessage(messages.public)} className='drawer__tab' to='/timelines/public'><i role='img' aria-label={intl.formatMessage(messages.public)} className='fa fa-fw fa-globe' /></Link>
           <Link title={intl.formatMessage(messages.direct)} className='drawer__tab' to='/timelines/direct'><i role='img' aria-label={intl.formatMessage(messages.direct)} className='fa fa-fw fa-envelope' /></Link>
-          <Link title={intl.formatMessage(messages.blocks)} className='drawer__tab' to='/blocks'><i role='img' aria-label={intl.formatMessage(messages.blocks)} className='fa fa-fw fa-ban' /></Link>
           <Link title={intl.formatMessage(messages.mutes)} className='drawer__tab' to='/mutes'><i role='img' aria-label={intl.formatMessage(messages.mutes)} className='fa fa-fw fa-volume-off' /></Link>
+          <Link title={intl.formatMessage(messages.blocks)} className='drawer__tab' to='/blocks'><i role='img' aria-label={intl.formatMessage(messages.blocks)} className='fa fa-fw fa-ban' /></Link>
+          <Link title={intl.formatMessage(messages.pins)} className='drawer__tab' to='/pinned'><i role='img' aria-label={intl.formatMessage(messages.pins)} className='fa fa-fw fa-thumb-tack' /></Link>
           <a title={intl.formatMessage(messages.preferences)} className='drawer__tab' href='/settings/preferences'><i role='img' aria-label={intl.formatMessage(messages.preferences)} className='fa fa-fw fa-cog' /></a>
           <a title={intl.formatMessage(messages.logout)} className='drawer__tab' href='/auth/sign_out' data-method='delete'><i role='img' aria-label={intl.formatMessage(messages.logout)} className='fa fa-fw fa-sign-out' /></a>
         </div>

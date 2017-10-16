@@ -14,7 +14,6 @@ const messages = defineMessages({
   notifications: { id: 'tabs_bar.notifications', defaultMessage: 'Notifications' },
   follow_requests: { id: 'navigation_bar.follow_requests', defaultMessage: 'Follow requests' },
   sign_out: { id: 'navigation_bar.logout', defaultMessage: 'Logout' },
-  pins: { id: 'navigation_bar.pins', defaultMessage: 'Pinned toots' },
 });
 
 const mapStateToProps = state => ({
