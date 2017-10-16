@@ -16,10 +16,10 @@ import { changeComposing } from '../../actions/compose';
 const messages = defineMessages({
   home_timeline: { id: 'tabs_bar.home', defaultMessage: 'Home' },
   notifications: { id: 'tabs_bar.notifications', defaultMessage: 'Notifications' },
-  public: { id: 'navigation_bar.public_timeline', defaultMessage: 'Federated timeline' },
   direct: { id: 'navigation_bar.direct', defaultMessage: 'Direct messages' },
   blocks: { id: 'navigation_bar.blocks', defaultMessage: 'Blocks' },
   mutes: { id: 'navigation_bar.mutes', defaultMessage: 'Mutes' },
+  pins: { id: 'navigation_bar.pins', defaultMessage: 'Pinned toots' },
   preferences: { id: 'navigation_bar.preferences', defaultMessage: 'Preferences' },
   logout: { id: 'navigation_bar.logout', defaultMessage: 'Logout' },
 });
