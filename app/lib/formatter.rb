@@ -83,17 +83,20 @@ class Formatter
   end
 
   def simplified_format(account)
-    return reformat(account.note) unless account.local?
-
-    html = encode_and_link_urls(account.note)
-    html = simple_format(html, {}, sanitize: false)
-    html = html.delete("\n")
-
-    html.html_safe # rubocop:disable Rails/OutputSafety
+    return reformat(account.note).html_safe unless account.local? # rubocop:disable Rails/OutputSafety
+    linkify(account.note)
   end
 
   def sanitize(html, config)
     Sanitize.fragment(html, config)
+  end
+
+  def linkify(text)
+    html = encode_and_link_urls(text)
+    html = simple_format(html, {}, sanitize: false)
+    html = html.delete("\n")
+
+    html.html_safe # rubocop:disable Rails/OutputSafety
   end
 
   private

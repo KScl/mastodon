@@ -3,7 +3,7 @@
 class ActivityPub::FetchRemoteStatusService < BaseService
   include JsonLdHelper
 
-  SUPPORTED_TYPES = %w(Note Article Video Image).freeze
+  SUPPORTED_TYPES = (ActivityPub::Activity::Create::SUPPORTED_TYPES + ActivityPub::Activity::Create::CONVERTED_TYPES).freeze
 
   # Should be called when uri has already been checked for locality
   def call(uri, id: true, prefetched_body: nil, on_behalf_of: nil)
