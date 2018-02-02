@@ -28,9 +28,9 @@ en:
     learn_more: Learn more
     other_instances: Instance list
     source_code: Source code
-    status_count_after: statuses
-    status_count_before: Who authored
-    user_count_after: users
+    status_count_after: commands
+    status_count_before: Who has run
+    user_count_after: user
     user_count_before: Home to
     what_is_mastodon: What is Mastodon?
   accounts:
@@ -41,8 +41,8 @@ en:
     nothing_here: There is nothing here!
     people_followed_by: People whom %{name} follows
     people_who_follow: People who follow %{name}
-    posts: Toots
-    posts_with_replies: Toots with replies
+    posts: Commands
+    posts_with_replies: Commands with replies
     remote_follow: Remote follow
     reserved_username: The username is reserved
     roles:
@@ -348,9 +348,9 @@ en:
       subject:
         one: "1 new notification since your last visit \U0001F418"
         other: "%{count} new notifications since your last visit \U0001F418"
-    favorite:
-      body: 'Your status was favorited by %{name}:'
-      subject: "%{name} favorited your status"
+    favourite:
+      body: 'Your command was saved by %{name}:'
+      subject: "%{name} saved your command"
     follow:
       body: "%{name} is now following you!"
       subject: "%{name} is now following you"
@@ -361,8 +361,8 @@ en:
       body: 'You were mentioned by %{name} in:'
       subject: You were mentioned by %{name}
     reblog:
-      body: 'Your status was retooted by %{name}:'
-      subject: "%{name} retooted your status"
+      body: 'Your command was reran by %{name}:'
+      subject: "%{name} reran your command"
   number:
     human:
       decimal_units:
@@ -380,18 +380,18 @@ en:
     truncate: "&hellip;"
   push_notifications:
     favourite:
-      title: "%{name} favourited your status"
+      title: "%{name} saved your command"
     follow:
-      title: "%{name} is now following you"
+      title: "%{name} followed you"
     group:
       title: "%{count} notifications"
     mention:
-      action_boost: Boost
-      action_expand: Show more
-      action_favourite: Favourite
-      title: "%{name} mentioned you"
+      action_boost: Rerun
+      action_expand: Open
+      action_favourite: Save
+      title: "%{name} targeted you"
     reblog:
-      title: "%{name} boosted your status"
+      title: "%{name} reran your command"
   remote_follow:
     acct: Enter your username@domain you want to follow from
     missing_resource: Could not find the required redirect URL for your account
@@ -453,10 +453,10 @@ en:
     open_in_web: Open in web
     over_character_limit: character limit of %{max} exceeded
     pin_errors:
-      limit: Too many toots pinned
-      ownership: Someone else's toot cannot be pinned
-      private: Non-public toot cannot be pinned
-      reblog: A boost cannot be pinned
+      limit: Too many commands pinned
+      ownership: Someone else's command cannot be pinned
+      private: Non-public command cannot be pinned
+      reblog: A rerun cannot be pinned
     show_more: Show more
     visibilities:
       private: Followers-only
@@ -467,8 +467,8 @@ en:
       unlisted_long: Everyone can see, but not listed on public timelines
   stream_entries:
     click_to_show: Click to show
-    pinned: Pinned toot
-    reblogged: retooted
+    pinned: Pinned command
+    reblogged: reran
     sensitive_content: Sensitive content
   terms:
     body_html: |

@@ -37,10 +37,10 @@ en:
         otp_attempt: Two-factor code
         password: Password
         setting_auto_play_gif: Auto-play animated GIFs
-        setting_boost_modal: Show confirmation dialog before retooting
+        setting_boost_modal: Show confirmation dialog before rerunning
         setting_default_privacy: Post privacy
         setting_default_sensitive: Always mark media as sensitive
-        setting_delete_modal: Show confirmation dialog before deleting a toot
+        setting_delete_modal: Show confirmation dialog before deleting a command
         setting_noindex: Opt-out of search engine indexing
         setting_system_font_ui: Use system's default font
         setting_unfollow_modal: Show confirmation dialog before unfollowing someone
@@ -52,11 +52,11 @@ en:
         must_be_following: Block notifications from people you don't follow
       notification_emails:
         digest: Send digest e-mails
-        favourite: Send e-mail when someone favorites your status
+        favourite: Send e-mail when someone saves your command
         follow: Send e-mail when someone follows you
         follow_request: Send e-mail when someone requests to follow you
         mention: Send e-mail when someone mentions you
-        reblog: Send e-mail when someone retoots your status
+        reblog: Send e-mail when someone reruns your command
     'no': 'No'
     required:
       mark: "*"
