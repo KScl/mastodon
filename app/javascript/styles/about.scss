@@ -7,7 +7,7 @@
     font-size: 16px;
     line-height: 30px;
     margin-bottom: 12px;
-    color: $ui-primary-color;
+    color: $primary-text-color;
 
     a {
       color: $ui-highlight-color;
@@ -24,7 +24,7 @@
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
-    color: lighten($ui-primary-color, 10%);
+    color: $primary-text-color;
   }
 
   h1 {
@@ -143,7 +143,7 @@
         font-weight: 400;
         font-size: 16px;
         line-height: 30px;
-        color: $ui-primary-color;
+        color: $primary-text-color;
 
         a {
           color: $ui-highlight-color;
@@ -333,7 +333,7 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 30px;
-    color: $ui-primary-color;
+    color: $primary-text-color;
 
     a {
       color: $ui-highlight-color;
@@ -399,7 +399,7 @@
         font-size: 14px;
         line-height: 24px;
         font-weight: 500;
-        color: $ui-primary-color;
+        color: $primary-text-color;
         padding-bottom: 5px;
         margin-bottom: 15px;
         border-bottom: 1px solid lighten($ui-base-color, 4%);
@@ -410,7 +410,7 @@
         a,
         span {
           font-weight: 400;
-          color: darken($ui-primary-color, 10%);
+          color: $ui-highlight-color;
         }
 
         a {
@@ -451,7 +451,7 @@
 
         .username {
           display: block;
-          color: $ui-primary-color;
+          color: $ui-highlight-color;
         }
       }
     }
@@ -545,7 +545,7 @@
 
             .fa {
               display: block;
-              color: $ui-primary-color;
+              color: $primary-text-color;
               font-size: 48px;
             }
           }
@@ -553,7 +553,7 @@
           .text {
             font-size: 16px;
             line-height: 30px;
-            color: $ui-primary-color;
+            color: $primary-text-color;
 
             h6 {
               font-size: inherit;
@@ -573,7 +573,7 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 30px;
-    color: $ui-primary-color;
+    color: $primary-text-color;
 
     a {
       color: $ui-highlight-color;
