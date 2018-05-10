@@ -104,7 +104,10 @@ export default class StatusContent extends React.PureComponent {
     const [ startX, startY ] = this.startXY;
     const [ deltaX, deltaY ] = [Math.abs(e.clientX - startX), Math.abs(e.clientY - startY)];
 
-    if (e.target.localName === 'button' || e.target.localName === 'a' || (e.target.parentNode && (e.target.parentNode.localName === 'button' || e.target.parentNode.localName === 'a'))) {
+    if (e.target.localName === 'a' || (e.target.parentNode && e.target.parentNode.localName === 'a')) {
+      return;
+    }
+    if (e.target.className === 'status__content__fullwidth-spoiler' || (e.target.parentNode && e.target.parentNode.className === 'status__content__fullwidth-spoiler') || e.target.localName === 'i') {
       return;
     }
 
@@ -159,7 +162,7 @@ export default class StatusContent extends React.PureComponent {
         </Permalink>
       )).reduce((aggregate, item) => [...aggregate, item, ' '], []);
 
-      const toggleText = hidden ? <FormattedMessage id='status.show_more' defaultMessage='Show more' /> : <FormattedMessage id='status.show_less' defaultMessage='Show less' />;
+      const toggleIcon = hidden ? <i className='fa fa-fw fa-angle-double-down' /> : <i className='fa fa-fw fa-angle-double-up' />;
 
       if (hidden) {
         mentionsPlaceholder = <div>{mentionLinks}</div>;
@@ -167,11 +170,10 @@ export default class StatusContent extends React.PureComponent {
 
       return (
         <div className={classNames} ref={this.setRef} tabIndex='0' aria-label={status.get('search_index')} onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>
-          <p style={{ marginBottom: hidden && status.get('mentions').isEmpty() ? '0px' : null }}>
-            <span dangerouslySetInnerHTML={spoilerContent} />
-            {' '}
-            <button tabIndex='0' className='status__content__spoiler-link' onClick={this.handleSpoilerClick}>{toggleText}</button>
-          </p>
+          <div tabIndex='0' className='status__content__fullwidth-spoiler' onClick={this.handleSpoilerClick}>
+            <div className='spoiler__content-warning' dangerouslySetInnerHTML={spoilerContent} />
+            <div className='spoiler__icon'>{toggleIcon}</div>
+          </div>
 
           {mentionsPlaceholder}
 

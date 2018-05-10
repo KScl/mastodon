@@ -132,7 +132,7 @@
         color: $ui-highlight-color;
       }
 
-      a.status__content__spoiler-link {
+      a.status__content__spoiler-link, .status__content__fullwidth-spoiler {
         color: $primary-text-color;
         background: $ui-primary-color;
 
@@ -193,7 +193,7 @@
         color: $ui-highlight-color;
       }
 
-      a.status__content__spoiler-link {
+      a.status__content__spoiler-link, .status__content__fullwidth-spoiler {
         color: $primary-text-color;
         background: $ui-primary-color;
 
