@@ -228,7 +228,7 @@
     border-width: 0 4.5px 7.8px;
     border-color: transparent transparent $ui-secondary-color;
     bottom: 8px;
-    right: 104px;
+    right: 16px;
   }
 }
 
@@ -800,9 +800,10 @@
 }
 
 .status__action-bar-dropdown {
-  float: left;
+  float: right;
   height: 18px;
-  width: 18px;
+  width: 22px;
+  margin-left: auto;
 }
 
 .detailed-status__action-bar-dropdown {
@@ -1427,7 +1428,6 @@
 
     &:hover {
       background: $ui-highlight-color;
-      color: $ui-secondary-color;
     }
   }
 }
