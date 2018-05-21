@@ -104,11 +104,12 @@ export default class StatusContent extends React.PureComponent {
     const [ startX, startY ] = this.startXY;
     const [ deltaX, deltaY ] = [Math.abs(e.clientX - startX), Math.abs(e.clientY - startY)];
 
-    if (e.target.localName === 'a' || (e.target.parentNode && e.target.parentNode.localName === 'a')) {
-      return;
-    }
-    if (e.target.className === 'status__content__fullwidth-spoiler' || (e.target.parentNode && e.target.parentNode.className === 'status__content__fullwidth-spoiler') || e.target.localName === 'i') {
-      return;
+    let curTarget = e.target;
+    for (var i = 4; i > 0 && curTarget; --i) {
+      if (curTarget.localName === 'a' || curTarget.className === 'status__content__fullwidth-spoiler') {
+        return;
+      }
+      curTarget = curTarget.parentNode;
     }
 
     if (deltaX + deltaY < 5 && e.button === 0 && this.props.onClick) {
