@@ -57,6 +57,8 @@ class Formatter
 
     raw_content = status.text
 
+    return '' if raw_content.blank?
+
     return reformat(raw_content) unless status.local?
 
     linkable_accounts = status.mentions.map(&:account)
