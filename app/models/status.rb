@@ -57,7 +57,6 @@ class Status < ApplicationRecord
   has_one :stream_entry, as: :activity, inverse_of: :status
 
   validates :uri, uniqueness: true, presence: true, unless: :local?
-  validates :text, presence: true, if: :local?
   validates_with StatusLengthValidator
   validates :reblog, uniqueness: { scope: :account }, if: :reblog?
 
