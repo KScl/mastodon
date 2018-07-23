@@ -43,7 +43,7 @@ class StatusesController < ApplicationController
     raise ActiveRecord::RecordNotFound if @status.hidden?
 
     skip_session!
-    expires_in 5.minutes, public: true
+    expires_in 10.minutes, public: true
     response.headers['X-Frame-Options'] = 'ALLOWALL'
 
     render 'stream_entries/embed', layout: 'embedded'
