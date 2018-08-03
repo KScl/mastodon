@@ -121,6 +121,9 @@ export default class Video extends React.PureComponent {
     hovered: false,
     muted: false,
     revealed: !this.props.sensitive,
+
+    wasPaused: false,
+    videoVolume: 20,
   };
 
   setPlayerRef = c => {
@@ -135,6 +138,10 @@ export default class Video extends React.PureComponent {
     this.seek = c;
   }
 
+  setVolRef = c => {
+    this.vol = c;
+  }
+
   handlePlay = () => {
     this.setState({ paused: false });
   }
@@ -147,31 +154,55 @@ export default class Video extends React.PureComponent {
     this.setState({ progress: 100 * (this.video.currentTime / this.video.duration) });
   }
 
-  handleMouseDown = e => {
-    document.addEventListener('mousemove', this.handleMouseMove, true);
-    document.addEventListener('mouseup', this.handleMouseUp, true);
-    document.addEventListener('touchmove', this.handleMouseMove, true);
-    document.addEventListener('touchend', this.handleMouseUp, true);
+  seekHandleMouseDown = e => {
+    document.addEventListener('mousemove', this.seekHandleMouseMove, true);
+    document.addEventListener('mouseup', this.seekHandleMouseUp, true);
+    document.addEventListener('touchmove', this.seekHandleMouseMove, true);
+    document.addEventListener('touchend', this.seekHandleMouseUp, true);
 
-    this.setState({ dragging: true });
-    this.video.pause();
-    this.handleMouseMove(e);
+    this.setState({ dragging: true, wasPaused: this.state.paused });
+    if (!this.state.wasPaused)
+      this.video.pause();
+    this.seekHandleMouseMove(e);
   }
 
-  handleMouseUp = () => {
-    document.removeEventListener('mousemove', this.handleMouseMove, true);
-    document.removeEventListener('mouseup', this.handleMouseUp, true);
-    document.removeEventListener('touchmove', this.handleMouseMove, true);
-    document.removeEventListener('touchend', this.handleMouseUp, true);
+  seekHandleMouseUp = () => {
+    document.removeEventListener('mousemove', this.seekHandleMouseMove, true);
+    document.removeEventListener('mouseup', this.seekHandleMouseUp, true);
+    document.removeEventListener('touchmove', this.seekHandleMouseMove, true);
+    document.removeEventListener('touchend', this.seekHandleMouseUp, true);
 
     this.setState({ dragging: false });
-    this.video.play();
+    if (!this.state.wasPaused)
+      this.video.play();
   }
 
-  handleMouseMove = throttle(e => {
+  seekHandleMouseMove = throttle(e => {
     const { x } = getPointerPosition(this.seek, e);
     this.video.currentTime = this.video.duration * x;
     this.setState({ progress: x * 100 });
+  }, 60);
+
+  volumeHandleMouseDown = e => {
+    document.addEventListener('mousemove', this.volumeHandleMouseMove, true);
+    document.addEventListener('mouseup', this.volumeHandleMouseUp, true);
+    document.addEventListener('touchmove', this.volumeHandleMouseMove, true);
+    document.addEventListener('touchend', this.volumeHandleMouseUp, true);
+    this.volumeHandleMouseMove(e);
+  }
+
+  volumeHandleMouseUp = () => {
+    document.removeEventListener('mousemove', this.volumeHandleMouseMove, true);
+    document.removeEventListener('mouseup', this.volumeHandleMouseUp, true);
+    document.removeEventListener('touchmove', this.volumeHandleMouseMove, true);
+    document.removeEventListener('touchend', this.volumeHandleMouseUp, true);
+  }
+
+  volumeHandleMouseMove = throttle(e => {
+    const { x } = getPointerPosition(this.vol, e);
+    this.video.volume = x;
+    this.video.muted = false;
+    this.setState({ videoVolume: x * 100, muted: false });
   }, 60);
 
   togglePlay = () => {
@@ -195,6 +226,8 @@ export default class Video extends React.PureComponent {
     document.addEventListener('webkitfullscreenchange', this.handleFullscreenChange, true);
     document.addEventListener('mozfullscreenchange', this.handleFullscreenChange, true);
     document.addEventListener('MSFullscreenChange', this.handleFullscreenChange, true);
+
+    this.video.volume = this.state.videoVolume * 0.01;
   }
 
   componentWillUnmount () {
@@ -248,7 +281,9 @@ export default class Video extends React.PureComponent {
 
   render () {
     const { preview, src, width, height, startTime, onOpenVideo, onCloseVideo, intl } = this.props;
-    const { progress, dragging, paused, fullscreen, hovered, muted, revealed } = this.state;
+    const { progress, dragging, paused, fullscreen, hovered, muted, revealed, videoVolume } = this.state;
+
+    let volumeIcon = (muted ? 'fa-volume-off' : (videoVolume > 50 ? 'fa-volume-up' : 'fa-volume-down'));
 
     return (
       <div className={classNames('video-player', { inactive: !revealed, inline: width && height && !fullscreen, fullscreen })} style={{ width, height }} ref={this.setPlayerRef} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
@@ -275,7 +310,7 @@ export default class Video extends React.PureComponent {
         </button>
 
         <div className={classNames('video-player__controls', { active: paused || hovered })}>
-          <div className='video-player__seek' onMouseDown={this.handleMouseDown} ref={this.setSeekRef}>
+          <div className='video-player__seek' onMouseDown={this.seekHandleMouseDown} ref={this.setSeekRef}>
             <div className='video-player__seek__progress' style={{ width: `${progress}%` }} />
 
             <span
@@ -285,13 +320,18 @@ export default class Video extends React.PureComponent {
             />
           </div>
 
+          <div className='video-player__volume' onMouseDown={this.volumeHandleMouseDown} ref={this.setVolRef}>
+            <div className='video-player__volume__progress' style={{ width: `${videoVolume}%` }} />
+            <span className={classNames('video-player__volume__handle')} tabIndex='0' style={{ left: `${videoVolume}%` }} />
+          </div>
+
           <div className='video-player__buttons left'>
             <button aria-label={intl.formatMessage(paused ? messages.play : messages.pause)} onClick={this.togglePlay}><i className={classNames('fa fa-fw', { 'fa-play': paused, 'fa-pause': !paused })} /></button>
-            <button aria-label={intl.formatMessage(muted ? messages.unmute : messages.mute)} onClick={this.toggleMute}><i className={classNames('fa fa-fw', { 'fa-volume-off': muted, 'fa-volume-up': !muted })} /></button>
-            {!onCloseVideo && <button aria-label={intl.formatMessage(messages.hide)} onClick={this.toggleReveal}><i className='fa fa-fw fa-eye' /></button>}
+            <button aria-label={intl.formatMessage(muted ? messages.unmute : messages.mute)} onClick={this.toggleMute}><i className={classNames('fa fa-fw', volumeIcon)} /></button>
           </div>
 
           <div className='video-player__buttons right'>
+            {!onCloseVideo && <button aria-label={intl.formatMessage(messages.hide)} onClick={this.toggleReveal}><i className='fa fa-fw fa-eye' /></button>}
             {(!fullscreen && onOpenVideo) && <button aria-label={intl.formatMessage(messages.expand)} onClick={this.handleOpenVideo}><i className='fa fa-fw fa-expand' /></button>}
             {onCloseVideo && <button aria-label={intl.formatMessage(messages.close)} onClick={this.handleCloseVideo}><i className='fa fa-fw fa-times' /></button>}
             <button aria-label={intl.formatMessage(fullscreen ? messages.exit_fullscreen : messages.fullscreen)} onClick={this.toggleFullscreen}><i className={classNames('fa fa-fw', { 'fa-arrows-alt': !fullscreen, 'fa-compress': fullscreen })} /></button>

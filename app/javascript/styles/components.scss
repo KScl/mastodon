@@ -4101,6 +4101,46 @@ button.icon-button.active i.fa-retweet {
       }
     }
   }
+
+  &__volume {
+    cursor: pointer;
+    height: 14px;
+    width: 20%;
+    min-width: 50px;
+    max-width: 100px;
+    position: absolute;
+    bottom: 10px;
+    left: 64px;
+
+    &::before {
+      content: "";
+      width: 100%;
+      background: rgba($white, 0.35);
+      display: block;
+      position: absolute;
+      height: 2px;
+      top: 5px;
+    }
+
+    &__progress {
+      display: block;
+      position: absolute;
+      height: 2px;
+      top: 5px;
+      background: $white;
+    }
+
+    &__handle {
+      position: absolute;
+      z-index: 3;
+      width: 4px;
+      height: 9px;
+      top: 2px;
+      margin-left: -2px;
+      background: $white;
+      pointer-events: none;
+    }
+  }
 }
 
 .media-spoiler-video {
