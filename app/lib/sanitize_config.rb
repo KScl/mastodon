@@ -19,8 +19,19 @@ class Sanitize
       node['class'] = class_list.join(' ')
     end
 
+    HEADER_DOWNSIZE_TRANSFORMER = lambda do |env|
+      node = env[:node]
+      return unless node.element?
+
+      header_size = /^h([1-6])$/.match(node.name)
+      return if !header_size
+
+      new_header_size = [6, header_size[1].to_i + 2].min
+      node.name = "h#{new_header_size}"
+    end
+
     MASTODON_STRICT ||= freeze_config(
-      elements: %w(p br span a),
+      elements: %w(p br span a h1 h2 h3 h4 h5 h6 em strong),
 
       attributes: {
         'a'    => %w(href rel class),
@@ -40,6 +51,7 @@ class Sanitize
 
       transformers: [
         CLASS_WHITELIST_TRANSFORMER,
+        HEADER_DOWNSIZE_TRANSFORMER,
       ]
     )
 
