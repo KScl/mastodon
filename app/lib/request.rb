@@ -15,8 +15,8 @@ class Request
     set_digest! if options.key?(:body)
   end
 
-  def on_behalf_of(account, key_id_format = :acct)
-    raise ArgumentError unless account.local?
+  def on_behalf_of(account, key_id_format = :uri)
+    raise ArgumentError if account.nil?
 
     @account       = account
     @key_id_format = key_id_format

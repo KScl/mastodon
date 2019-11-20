@@ -34,6 +34,7 @@ class FetchAtomService < BaseService
 
     @response = Request.new(:get, @url)
                        .add_headers('Accept' => accept)
+                       .on_behalf_of(Account.representative)
                        .perform
   end
 
