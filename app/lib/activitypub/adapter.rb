@@ -7,6 +7,7 @@ class ActivityPub::Adapter < ActiveModelSerializers::Adapter::Base
       'https://w3id.org/security/v1',
 
       {
+        'toot'                      => 'http://joinmastodon.org/ns#',
         'manuallyApprovesFollowers' => 'as:manuallyApprovesFollowers',
         'sensitive'                 => 'as:sensitive',
         'Hashtag'                   => 'as:Hashtag',
