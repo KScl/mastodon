@@ -36,11 +36,9 @@ module JsonLdHelper
   def fetch_resource_without_id_validation(uri, on_behalf_of = nil)
     on_behalf_of ||= Account.representative
 
-    build_request(uri, on_behalf_of).perform do |response|
-      return body_to_json(response.to_s) if response.code == 200
-    end
-
-    nil
+    response = build_request(uri, on_behalf_of).perform
+    return nil unless response.code == 200
+    body_to_json(response.to_s)
   end
 
   def body_to_json(body)
