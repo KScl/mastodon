@@ -3,6 +3,8 @@
 class ActivityPub::FetchRemoteStatusService < BaseService
   include JsonLdHelper
 
+  SUPPORTED_TYPES = %w(Note Article Video Image).freeze
+
   # Should be called when uri has already been checked for locality
   def call(uri, id: true, prefetched_body: nil, on_behalf_of: nil)
     @json = if prefetched_body.nil?
@@ -42,6 +44,6 @@ class ActivityPub::FetchRemoteStatusService < BaseService
   end
 
   def expected_type?
-    %w(Note Article).include? @json['type']
+    equals_or_includes_any?(@json['type'], SUPPORTED_TYPES)
   end
 end
