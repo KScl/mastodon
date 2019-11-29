@@ -37,7 +37,7 @@ module JsonLdHelper
     on_behalf_of ||= Account.representative
 
     build_request(uri, on_behalf_of).perform do |response|
-      return body_to_json(response.body_with_limit) if response.code == 200
+      return body_to_json(response.to_s) if response.code == 200
     end
 
     nil
