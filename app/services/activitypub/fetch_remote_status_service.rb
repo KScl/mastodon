@@ -44,6 +44,6 @@ class ActivityPub::FetchRemoteStatusService < BaseService
   end
 
   def expected_type?
-    equals_or_includes_any?(@json['type'], SUPPORTED_TYPES)
+    SUPPORTED_TYPES.include?(@json['type'])
   end
 end
