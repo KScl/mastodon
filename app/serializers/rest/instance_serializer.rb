@@ -4,7 +4,12 @@ class REST::InstanceSerializer < ActiveModel::Serializer
   include RoutingHelper
 
   attributes :uri, :title, :description, :email,
-             :version, :urls, :stats, :thumbnail
+             :version, :urls, :stats, :thumbnail, :max_toot_chars
+             :languages, :registrations
+
+  has_one :contact_account, serializer: REST::AccountSerializer
+
+  delegate :contact_account, to: :instance_presenter
 
   def uri
     Rails.configuration.x.local_domain
@@ -30,6 +35,10 @@ class REST::InstanceSerializer < ActiveModel::Serializer
     full_asset_url(instance_presenter.thumbnail.file.url) if instance_presenter.thumbnail
   end
 
+  def max_toot_chars
+    "unlimited"
+  end
+
   def stats
     {
       user_count: instance_presenter.user_count,
@@ -40,6 +49,14 @@ class REST::InstanceSerializer < ActiveModel::Serializer
 
   def urls
     { streaming_api: Rails.configuration.x.streaming_api_base_url }
+  end
+
+  def languages
+    [ENV.fetch('DEFAULT_LOCALE', I18n.default_locale)]
+  end
+
+  def registrations
+    Setting.open_registrations && !Rails.configuration.x.single_user_mode
   end
 
   private

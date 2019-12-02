@@ -31,7 +31,7 @@ module Mastodon
     end
 
     def flags
-      ''
+      '+iaqd'
     end
 
     def to_a
@@ -39,7 +39,11 @@ module Mastodon
     end
 
     def to_s
-      [to_a.join('.'), flags, @git].join
+      [to_a.join('.'), flags].join
+    end
+
+    def as_git
+      ['#', to_a.join('.'), @git].join
     end
 
     def source_base_url
