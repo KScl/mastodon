@@ -17,7 +17,7 @@ module AccountHeader
 
   included do
     # Header upload
-    has_attached_file :header, styles: ->(f) { header_styles(f) }, convert_options: { all: '-quality 80 -strip' }
+    has_attached_file :header, styles: ->(f) { header_styles(f) }, convert_options: { all: '-strip' }
     validates_attachment_content_type :header, content_type: IMAGE_MIME_TYPES
     validates_attachment_size :header, less_than: 2.megabytes
   end
