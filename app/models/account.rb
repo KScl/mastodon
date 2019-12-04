@@ -156,13 +156,20 @@ class Account < ApplicationRecord
   end
 
   def save_with_optional_media!
-    save!
-  rescue ActiveRecord::RecordInvalid
-    self.avatar              = nil
-    self.header              = nil
-    self[:avatar_remote_url] = ''
-    self[:header_remote_url] = ''
-    save!
+    begin
+      save!
+    rescue ActiveRecord::RecordInvalid
+      self.header              = nil
+      self[:header_remote_url] = ''
+
+      begin
+        save!
+      rescue ActiveRecord::RecordInvalid
+        self.avatar              = nil
+        self[:avatar_remote_url] = ''
+        save!
+      end
+    end
   end
 
   def object_type
