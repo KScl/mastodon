@@ -139,7 +139,7 @@ class Account < ApplicationRecord
   end
 
   def possibly_stale?
-    last_webfingered_at.nil? || last_webfingered_at <= 1.day.ago
+    last_webfingered_at.nil? || last_webfingered_at <= 7.days.ago
   end
 
   def refresh!
