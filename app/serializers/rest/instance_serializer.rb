@@ -36,7 +36,7 @@ class REST::InstanceSerializer < ActiveModel::Serializer
   end
 
   def max_toot_chars
-    "unlimited"
+    2097152
   end
 
   def stats
