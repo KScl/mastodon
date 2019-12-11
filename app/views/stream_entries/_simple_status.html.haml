@@ -15,9 +15,9 @@
 
   .status__content.p-name.emojify<
     - if status.spoiler_text?
-      %p{ style: 'margin-bottom: 0' }<
-        %span.p-summary> #{status.spoiler_text}&nbsp;
-        %a.status__content__spoiler-link{ href: '#' }= t('statuses.show_more')
+      .status__content__fullwidth-spoiler
+        .spoiler__content-warning> #{status.spoiler_text}
+        .spoiler__icon= fa_icon 'fw angle-double-down'
     .e-content{ lang: status.language, style: "display: #{status.spoiler_text? ? 'none' : 'block'}; direction: #{rtl_status?(status) ? 'rtl' : 'ltr'}" }= Formatter.instance.format(status)
 
   - unless status.media_attachments.empty?

@@ -95,15 +95,16 @@ function main() {
     return false;
   });
 
-  delegate(document, '.status__content__spoiler-link', 'click', ({ target }) => {
-    const contentEl = target.parentNode.parentNode.querySelector('.e-content');
+  delegate(document, '.status__content__fullwidth-spoiler', 'click', ({ target }) => {
+    const contentEl = target.parentNode.querySelector('.e-content');
+    const iconEl = target.querySelector('.spoiler__icon');
 
     if (contentEl.style.display === 'block') {
       contentEl.style.display = 'none';
-      target.parentNode.style.marginBottom = 0;
+      iconEl.innerHTML = "<i className='fa fa-fw fa-angle-double-down'></i>";
     } else {
       contentEl.style.display = 'block';
-      target.parentNode.style.marginBottom = null;
+      iconEl.innerHTML = "<i className='fa fa-fw fa-angle-double-up'></i>";
     }
 
     return false;
