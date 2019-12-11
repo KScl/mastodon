@@ -13,9 +13,9 @@ export function getInstanceColor(titleText, url) {
   if (parts.length > 1)
     return sha1(parts[1]).substr(0, 6);
 
-  parts = url.split('/@');
-  if (parts.length > 1) {
-    let instance_name = parts[0].split('://')[1];
+  let after_http = url.split('://')[1];
+  if (after_http) {
+    let instance_name = after_http.split('/')[0];
     if (instance_name)
       return sha1(instance_name).substr(0, 6);
   }
