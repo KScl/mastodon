@@ -130,6 +130,10 @@
 
       a {
         color: $ui-highlight-color;
+
+        .mention {
+          color: $classic-secondary-color;
+        }
       }
 
       .status__content__fullwidth-spoiler {
@@ -191,6 +195,10 @@
 
       a {
         color: $ui-highlight-color;
+
+        .mention {
+          color: $classic-secondary-color;
+        }
       }
 
       .status__content__fullwidth-spoiler {
