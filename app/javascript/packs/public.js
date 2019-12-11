@@ -96,6 +96,9 @@ function main() {
   });
 
   delegate(document, '.status__content__fullwidth-spoiler', 'click', ({ target }) => {
+    while (target.parentNode && target.className != 'status__content__fullwidth-spoiler')
+      target = target.parentNode;
+
     const contentEl = target.parentNode.querySelector('.e-content');
     const iconEl = target.querySelector('.spoiler__icon');
 
