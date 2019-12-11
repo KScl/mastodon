@@ -494,9 +494,10 @@
 }
 
 .activity-stream-tabs {
-  background: $simple-background-color;
-  border-bottom: 1px solid $ui-secondary-color;
+  background: lighten($ui-base-color, 12%);
+  border-bottom: 1px solid $ui-base-color;
   position: relative;
+  text-align: center;
   z-index: 2;
 
   a {
@@ -504,8 +505,9 @@
     padding: 15px;
     text-decoration: none;
     color: $ui-highlight-color;
-    text-transform: uppercase;
     font-weight: 500;
+    margin: 0px 5% 0px 5%;
+    font-size: 1.2em;
 
     &:hover,
     &:active,
@@ -514,7 +516,7 @@
     }
 
     &.active {
-      color: $ui-base-color;
+      color: $white;
       cursor: default;
     }
   }
