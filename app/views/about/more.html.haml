@@ -53,6 +53,9 @@
 
   .footer-links
     .container
-      %p= link_to t('about.source_code'), @instance_presenter.source_url
-      %p= "Version: #{@instance_presenter.version_number}"
-      %p= @instance_presenter.as_git
+      %p
+        = link_to t('about.source_code'), @instance_presenter.source_url
+        %br
+        = "Version: #{@instance_presenter.version_number}"
+        %br
+        = @instance_presenter.as_git

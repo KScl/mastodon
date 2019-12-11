@@ -101,10 +101,10 @@ function main() {
 
     if (contentEl.style.display === 'block') {
       contentEl.style.display = 'none';
-      iconEl.innerHTML = "<i className='fa fa-fw fa-angle-double-down'></i>";
+      iconEl.innerHTML = "<i class='fa fa-fw fa-angle-double-down'></i>";
     } else {
       contentEl.style.display = 'block';
-      iconEl.innerHTML = "<i className='fa fa-fw fa-angle-double-up'></i>";
+      iconEl.innerHTML = "<i class='fa fa-fw fa-angle-double-up'></i>";
     }
 
     return false;
