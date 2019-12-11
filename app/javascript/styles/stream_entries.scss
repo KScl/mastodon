@@ -131,7 +131,7 @@
       a {
         color: $ui-highlight-color;
 
-        .mention {
+        &.mention {
           color: $classic-secondary-color;
         }
       }
@@ -196,7 +196,7 @@
       a {
         color: $ui-highlight-color;
 
-        .mention {
+        &.mention {
           color: $classic-secondary-color;
         }
       }
