@@ -47,6 +47,9 @@ function main() {
     const relativeFormat = new IntlRelativeFormat(locale);
 
     [].forEach.call(document.querySelectorAll('.mention'), (content) => {
+      if (content.classList.contains('hashtag'))
+        return;
+
       let domainName = getInstanceDomain('', content.href);
       let color = getInstanceColor(domainName);
 

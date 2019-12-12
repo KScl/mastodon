@@ -130,9 +130,11 @@
 
       a {
         color: $ui-highlight-color;
-
         &.mention {
           color: $classic-secondary-color;
+          &.hashtag {
+            color: $ui-highlight-color;
+          }
         }
       }
 
@@ -195,9 +197,11 @@
 
       a {
         color: $ui-highlight-color;
-
         &.mention {
           color: $classic-secondary-color;
+          &.hashtag {
+            color: $ui-highlight-color;
+          }
         }
       }
 
