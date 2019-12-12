@@ -305,7 +305,7 @@
 
 .accounts-grid {
   box-shadow: 0 0 15px rgba($base-shadow-color, 0.2);
-  background: darken($simple-background-color, 8%);
+  background: lighten($ui-base-color, 8%);
   border-radius: 0 0 4px 4px;
   padding: 20px 5px;
   padding-bottom: 10px;
@@ -323,9 +323,9 @@
   .account-grid-card {
     box-sizing: border-box;
     width: 335px;
-    background: $simple-background-color;
+    background: lighten($ui-base-color, 12%);
     border-radius: 4px;
-    color: $ui-base-color;
+    color: $primary-text-color;
     margin: 0 5px 10px;
     position: relative;
 
@@ -371,7 +371,7 @@
         display: block;
         @include avatar-radius();
         @include avatar-size(80px);
-        border: 2px solid $simple-background-color;
+        border: 2px transparent;
       }
     }
 
@@ -382,7 +382,7 @@
 
       a {
         display: block;
-        color: $ui-base-color;
+        color: $primary-text-color;
         text-decoration: none;
         text-overflow: ellipsis;
         overflow: hidden;
@@ -404,7 +404,7 @@
     }
 
     .username {
-      color: lighten($ui-base-color, 34%);
+      color: $ui-primary-color;
       font-size: 14px;
       font-weight: 400;
     }
@@ -413,7 +413,7 @@
       padding: 10px 15px;
       padding-top: 15px;
       box-sizing: border-box;
-      color: lighten($ui-base-color, 26%);
+      color: $primary-text-color;
       word-wrap: break-word;
       min-height: 80px;
     }
