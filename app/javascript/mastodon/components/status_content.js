@@ -5,7 +5,7 @@ import { isRtl } from '../rtl';
 import { FormattedMessage } from 'react-intl';
 import Permalink from './permalink';
 import classnames from 'classnames';
-import { getInstanceColor, getContrastYIQ } from '../instance_color'
+import { getInstanceDomain, getInstanceColor, getContrastYIQ } from '../instance_color'
 import { htmlStringRotate } from '../rotn'
 
 export default class StatusContent extends React.PureComponent {
@@ -50,15 +50,15 @@ export default class StatusContent extends React.PureComponent {
         let titleText = mention.get('acct');
 
         link.setAttribute('title',titleText);
-        let color = getInstanceColor(titleText, url);
 
+        let color = getInstanceColor(getInstanceDomain(titleText, url));
         link.setAttribute('style', `border-radius: 4px; border-left: 2px solid #${color}; border-bottom: 1px solid #${color}; padding-right: 2px;`);
+
         let at = link.firstChild;
         if (at.nodeValue === '@' || at.textContent === '@') {
-          let atColor = getContrastYIQ(color);
           let newSpan = document.createElement('b');
-          newSpan.appendChild(document.createTextNode('@'));
-          newSpan.setAttribute('style', `color: ${atColor}; font-weight:bold; background-color: #${color}; padding-right: 2px; margin-right: 1px;`);
+          newSpan.textContent = '@';
+          newSpan.setAttribute('style', `color: ${getContrastYIQ(color)}; font-weight:bold; background-color: #${color}; padding-right: 2px; margin-right: 1px;`);
           link.replaceChild(newSpan, at);
         }
       } else if (link.textContent[0] === '#' || (link.previousSibling && link.previousSibling.textContent && link.previousSibling.textContent[link.previousSibling.textContent.length - 1] === '#')) {

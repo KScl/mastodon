@@ -21,7 +21,7 @@ function main() {
   const { length } = require('stringz');
   const IntlRelativeFormat = require('intl-relativeformat').default;
   const { delegate } = require('rails-ujs');
-  const { getInstanceColor, getContrastYIQ } = require('../mastodon/instance_color');
+  const { getInstanceDomain, getInstanceColor, getContrastYIQ } = require('../mastodon/instance_color');
   const emojify = require('../mastodon/emoji').default;
   const { getLocale } = require('../mastodon/locales');
   const { localeData } = getLocale();
@@ -47,17 +47,17 @@ function main() {
     const relativeFormat = new IntlRelativeFormat(locale);
 
     [].forEach.call(document.querySelectorAll('.mention'), (content) => {
-      let url = content.href;
-      let color = getInstanceColor('', url);
+      let domainName = getInstanceDomain('', content.href);
+      let color = getInstanceColor(domainName);
 
+      content.setAttribute('title', `${content.textContent}@${domainName}`);
       content.setAttribute('style', `border-radius: 4px; border-left: 2px solid #${color}; border-bottom: 1px solid #${color}; padding-right: 2px;`);
       let at = content.firstChild;
 
       if (at.nodeValue === '@' || at.textContent === '@') {
-        let atColor = getContrastYIQ(color);
         let newSpan = document.createElement('b');
-        newSpan.appendChild(document.createTextNode('@'));
-        newSpan.setAttribute('style', `color: ${atColor}; font-weight:bold; background-color: #${color}; padding-right: 2px; margin-right: 1px;`);
+        newSpan.textContent = '@';
+        newSpan.setAttribute('style', `color: ${getContrastYIQ(color)}; font-weight:bold; background-color: #${color}; padding-right: 2px; margin-right: 1px;`);
         content.replaceChild(newSpan, at);
       }
     });

@@ -8,17 +8,23 @@ export function getContrastYIQ(hexcolor) {
   return (yiq >= 128) ? 'black' : 'white';
 }
 
-export function getInstanceColor(titleText, url) {
-  let parts = titleText.split('@');
-  if (parts.length > 1)
-    return sha1(parts[1]).substr(0, 6);
+export function getInstanceColor(domain) {
+  if (domain != '')
+    return sha1(domain).substr(0, 6);
+  return 'ffffff';
+}
+
+export function getInstanceDomain(titleText, url) {
+  if (titleText != '') {
+    let parts = titleText.split('@');
+    if (parts.length > 1)
+      return parts[1];
+  }
 
   let after_http = url.split('://')[1];
   if (after_http) {
-    let instance_name = after_http.split('/')[0];
-    if (instance_name)
-      return sha1(instance_name).substr(0, 6);
+    return after_http.split('/')[0];
   }
 
-  return 'ffffff'
+  return '';
 }
