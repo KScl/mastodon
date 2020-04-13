@@ -21,10 +21,12 @@ class Item extends React.PureComponent {
     size: PropTypes.number.isRequired,
     onClick: PropTypes.func.isRequired,
     autoPlayGif: PropTypes.bool,
+    publicPage: PropTypes.bool,
   };
 
   static defaultProps = {
     autoPlayGif: false,
+    publicPage: false,
   };
 
   handleMouseEnter = (e) => {
@@ -117,8 +119,9 @@ class Item extends React.PureComponent {
       const originalUrl = attachment.get('url');
       const originalWidth = attachment.getIn(['meta', 'original', 'width']);
 
-      const hasSize = typeof originalWidth === 'number' && typeof previewWidth === 'number';
+      const hasSize = typeof originalWidth === 'number' && typeof previewWidth === 'number' && this.props.publicPage == false;
 
+      const mainSrc = this.props.publicPage == false ? previewUrl : originalUrl;
       const srcSet = hasSize ? `${originalUrl} ${originalWidth}w, ${previewUrl} ${previewWidth}w` : null;
       const sizes = hasSize ? `(min-width: 1025px) ${320 * (width / 100)}px, ${width}vw` : null;
 
@@ -129,7 +132,7 @@ class Item extends React.PureComponent {
           onClick={this.handleClick}
           target='_blank'
         >
-          <img src={previewUrl} srcSet={srcSet} sizes={sizes} alt='' />
+          <img src={mainSrc} srcSet={srcSet} sizes={sizes} alt='' />
         </a>
       );
     } else if (attachment.get('type') === 'gifv') {
@@ -173,10 +176,12 @@ export default class MediaGallery extends React.PureComponent {
     onOpenMedia: PropTypes.func.isRequired,
     intl: PropTypes.object.isRequired,
     autoPlayGif: PropTypes.bool,
+    publicPage: PropTypes.bool,
   };
 
   static defaultProps = {
     autoPlayGif: false,
+    publicPage: false,
   };
 
   state = {
@@ -219,7 +224,7 @@ export default class MediaGallery extends React.PureComponent {
       );
     } else {
       const size = media.take(4).size;
-      children = media.take(4).map((attachment, i) => <Item key={attachment.get('id')} onClick={this.handleClick} attachment={attachment} autoPlayGif={this.props.autoPlayGif} index={i} size={size} />);
+      children = media.take(4).map((attachment, i) => <Item key={attachment.get('id')} onClick={this.handleClick} attachment={attachment} autoPlayGif={this.props.autoPlayGif} index={i} size={size} publicPage={this.props.publicPage} />);
     }
 
     return (
